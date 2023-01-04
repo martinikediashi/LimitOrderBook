@@ -19,7 +19,7 @@ public class Order {
     public long getSize() { return size; }
     public char getSide ( ) { return side; }
 
-    //Suggestion, having setters would make it easier to modify existing modifications
+    //Suggestion, having setters would make it easier to modify existing orders
     /*public void setId(long id) {
         this.id = id;
     }
