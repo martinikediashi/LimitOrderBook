@@ -2,6 +2,8 @@ package com.order;
 
 public class Order {
 
+    // The Order class could significantly be improved with the inclusion of a timestamp variable
+
     private long id; // id of order
     private double price ;
     private char side; // B "Bid " or O " Offer"

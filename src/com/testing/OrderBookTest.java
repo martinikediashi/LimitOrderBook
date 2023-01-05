@@ -20,7 +20,7 @@ public class OrderBookTest {
         Order order4 = new Order(4, 101.0, 'O', 40);
         Order order5 = new Order(5, 97.0, 'B', 50);
         Order order6 = new Order(6, 14.0, 'O', 60);
-
+        Order order7 = new Order(1, 12.0, 'B', 60);
 
         orderBook.addOrder(order1);
         orderBook.addOrder(order2);
@@ -28,10 +28,12 @@ public class OrderBookTest {
         orderBook.addOrder(order4);
         orderBook.addOrder(order5);
         orderBook.addOrder(order6);
+        orderBook.addOrder(order7);
 
         assertEquals(100.0, orderBook.getPrice('B', 1), 0.01);
         assertEquals(99.5, orderBook.getPrice('B', 2), 0.01);
         assertEquals(97.0, orderBook.getPrice('B', 3), 0.01);
+        assertEquals(12.0, orderBook.getPrice('B', 4), 0.01);
         assertEquals(14.0, orderBook.getPrice('O', 1), 0.01);
         assertEquals(100.0, orderBook.getPrice('O', 2), 0.01);
         assertEquals(101.0, orderBook.getPrice('O', 3), 0.01);
@@ -156,11 +158,13 @@ public class OrderBookTest {
         Order order2 = new Order(2, 99.0, 'B', 20);
         Order order3 = new Order(3, 100.0, 'O', 30);
         Order order4 = new Order(4, 101.0, 'O', 40);
+        Order order5 = new Order(415, 103.0, 'O', 50);
 
         orderBook.addOrder(order1);
         orderBook.addOrder(order2);
         orderBook.addOrder(order3);
         orderBook.addOrder(order4);
+        orderBook.addOrder(order5);
 
         // test lowercase side characters being submitted
         assertEquals(100.0, orderBook.getPrice('b', 1), 0.01);
@@ -169,15 +173,17 @@ public class OrderBookTest {
         // test lowercase side characters being submitted
         assertEquals(10.0, orderBook.getSize('b', 1), 0.01);
         // test incorrect level number being submitted
-        assertEquals(0.0, orderBook.getSize('O', 3), 0.01);
+        assertEquals(0.0, orderBook.getSize('O', 4), 0.01);
         // test lowercase side characters being submitted
         assertEquals(2, orderBook.getTotalSize('b'), 0.01);
         // test lowercase side characters being submitted
-        assertEquals(2, orderBook.getTotalSize('o'), 0.01);
+        assertEquals(3, orderBook.getTotalSize('o'), 0.01);
         // test incorrect side characters being submitted
         assertEquals(0.0, orderBook.getTotalSize('d'), 0.01);
         // test incorrect side characters being submitted
         assertEquals(0.0, orderBook.getTotalSize('e'), 0.01);
+        // test random id
+        assertEquals(103.0, orderBook.getPrice('O', 3), 0.01);
 
 
     }

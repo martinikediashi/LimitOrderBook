@@ -32,7 +32,7 @@ public class OrderBook {
             if (side == 'B') {
                 for (; i < orders.size(); i++) {
                     Order o = orders.get(i);
-                    if (o.getPrice() < price || (o.getPrice() == price && o.getId() > id)) {
+                    if (o.getPrice() < price) {
                         break;
                     }
                 }
@@ -41,7 +41,7 @@ public class OrderBook {
             } else {
                 for (; i < orders.size(); i++) {
                     Order o = orders.get(i);
-                    if (o.getPrice() > price || (o.getPrice() == price && o.getId() > id)) {
+                    if (o.getPrice() > price) {
                         break;
                     }
                 }
@@ -86,13 +86,33 @@ public class OrderBook {
            long modId = order.getId();
            double modPrice = order.getPrice();
            long modSize = newSize;
+           int i = 0;
 
            orders.remove(order);
 
            Order order1 = new Order(modId, modPrice, modSide, modSize);
 
-           orders.add((int) id - 1, order1);
-           ordersById.put(id, order1);
+           char side1 = Character.toUpperCase(order1.getSide());
+
+           if (side == 'B') {
+               for (; i < orders.size(); i++) {
+                   Order o = orders.get(i);
+                   if (o.getPrice() < modPrice) {
+                       break;
+                   }
+               }
+               orders.add(i, order1);
+               ordersById.put(id, order1);
+           } else {
+               for (; i < orders.size(); i++) {
+                   Order o = orders.get(i);
+                   if (o.getPrice() > modPrice) {
+                       break;
+                   }
+               }
+               orders.add(i, order1);
+               ordersById.put(id, order1);
+           }
            ordersBySide.put(modSide, orders);
        } else {
            return;
