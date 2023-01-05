@@ -23,7 +23,7 @@ public class OrderBook {
         int i = 0;
 
         List<Order> orders = ordersBySide.get(side);
-        if (side == 'B' || side == 'O') {
+        if ((side == 'B' || side == 'O') && Character.isLetter(side)) {
             if (orders == null) {
                 orders = new LinkedList<>();
                 ordersBySide.put(side, orders);
@@ -76,7 +76,7 @@ public class OrderBook {
         }
 
        char side = Character.toUpperCase(order.getSide());
-       if (side == 'B' || side == 'O') {
+       if ((side == 'B' || side == 'O') && Character.isLetter(side)) {
            List<Order> orders = ordersBySide.get(side);
            if (orders == null) {
                return;
@@ -122,7 +122,7 @@ public class OrderBook {
 
     // Return Price based on Side ('B' bid or 'O' offer and Level) from OrderBook
     public double getPrice(char side, int level) {
-        if (Character.toUpperCase(side) == 'B' || Character.toUpperCase(side) == 'O') {
+        if ((Character.toUpperCase(side) == 'B' || Character.toUpperCase(side) == 'O') && Character.isLetter(side)) {
         List<Order> orders = ordersBySide.get(Character.toUpperCase(side));
             if (orders == null || orders.size() < level) {
                 return Double.NaN;
@@ -135,7 +135,7 @@ public class OrderBook {
 
     //Given a side and a level return the size for that level
     public long getSize(char side, int level) {
-        if (Character.toUpperCase(side) == 'B' || Character.toUpperCase(side) == 'O') {
+        if ((Character.toUpperCase(side) == 'B' || Character.toUpperCase(side) == 'O') && Character.isLetter(side)) {
         List<Order> orders = ordersBySide.get(Character.toUpperCase(side));
             if (orders == null || orders.size() < level) {
                 return 0;
@@ -148,7 +148,7 @@ public class OrderBook {
 
     // Return OrderBook Size based on Side ('B' bid or 'O' offer)
     public long getTotalSize(char side) {
-        if (Character.toUpperCase(side) == 'B' || Character.toUpperCase(side) == 'O') {
+        if ((Character.toUpperCase(side) == 'B' || Character.toUpperCase(side) == 'O') && Character.isLetter(side)) {
             List<Order> orders = ordersBySide.get(Character.toUpperCase(side));
             if (orders == null) {
                 return 0;
@@ -162,7 +162,7 @@ public class OrderBook {
 
     // Return all the orders from that side ('B' bid or 'O' offer and Level)  of the book, in level- and time-order based on Side
     public List<Order> getOrders(char side) {
-        if (Character.toUpperCase(side) == 'B' || Character.toUpperCase(side) == 'O') {
+        if ((Character.toUpperCase(side) == 'B' || Character.toUpperCase(side) == 'O') && Character.isLetter(side)) {
             List<Order> orders = ordersBySide.get(Character.toUpperCase(side));
             if (orders == null) {
                 return new LinkedList<>();
